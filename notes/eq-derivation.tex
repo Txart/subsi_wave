@@ -1,0 +1,53 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath}
+
+% Margin
+\textwidth=5in
+
+\begin{document}
+
+Groundwater flow in peatlands much wider than they are deep is governed by the Boussinesq equation,
+$$
+S\frac{\partial h}{\partial t} = \nabla \left(T(h) \nabla h\right) + P-ET.
+$$
+
+We model the rate of peat accumulation or loss at a point, $\frac{\partial p}{\partial t}$, as driven linearly by the (negative downwards) water table depth, $\zeta=h-p$, at that point,
+$$
+\frac{\partial p}{\partial t} = f_p + \alpha \zeta,
+$$
+
+\noindent where $f_p$ is the peat production when the water table is in the surface, and $\alpha$ is the rate of peat loss due to its decomposition.
+
+We first take the derivative of the peat accumulation equation. Assuming $f_p$ and $\alpha$ don't change over time\footnote{this amounts to stating that the peat decomposes at the same rate over centuries, which may amount to some continuity in bacterial activity, temperature, and other factors.} we get
+
+\begin{equation}
+  \label{eq:d2p/dt}
+\frac{\partial^2 p}{\partial t^2} = \alpha \frac{\partial \zeta}{\partial t},
+\end{equation}
+We write the Boussinesq equation in terms of $p$ and $\zeta$:
+
+\begin{equation}
+  \label{eq:boussi-p-zeta}
+S\frac{\partial (p+\zeta)}{\partial t} = \nabla \left[T(p+\zeta) \nabla (p+\zeta)\right] + P-ET.
+\end{equation}
+
+Now we follow Cobb et al. 2017 in the following simplification:
+\begin{itemize}
+  \item $\zeta$ is, to a very good approximation, spatially uniform even close to drains where the gradient of the surface is larger. Thus, $\nabla \zeta \approx 0$.
+\item The transmissivity changes in several orders of magnitude in the vertical direction. The upper layers of peat conduct water at a much higher rate than the lower ones. Therefore, the transimissivity is approximately independent of the depth of the peat, and can be modelled as depending only on the water table depth at one point: $T(p+\zeta) \approx T(\zeta)$.
+\item Combining the above two, we readily see 
+  $$
+  \nabla T(p + \zeta) \approx \nabla T(\zeta) = \frac{dT}{d\zeta}\nabla\zeta \approx 0.
+  $$
+\end{itemize}
+
+Finally, we substitute Eq.\eqref{eq:d2p/dt} in Eq.\eqref{eq:boussi-p-zeta} to eliminate the time derivative on $\zeta$
+
+$$
+\frac{\partial^2 p}{\partial t^2} + \alpha \frac{\partial p}{\partial t} = \frac{\alpha T}{S}\nabla^2 p + \frac{\alpha (P-ET)}{S}.
+$$
+
+This is a wave equation with a damping coefficient $\alpha$, external forcing $\frac{\alpha (P-ET)}{S_y}$ and frequency $\left(\frac{\alpha T}{S}\right)^{1/2}$.
+The peat surface vibrates through time as a drum membrane, with a frequency proportional to the peat hydraulic properties, a friction coefficient proportional to the peat subsidence rate, and driven by a force term proportional to the amount of water that enters the peat storage.
+When taking the $t\rightarrow \infty$ limit, it reduces to the steady state equation found in Cobb et al. 2017.
+\end{document}
